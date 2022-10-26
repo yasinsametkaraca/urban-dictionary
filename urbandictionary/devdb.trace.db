@@ -1,0 +1,12 @@
+2022-10-26 14:19:52 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table [*]user (id bigint not null, display_name varchar(255), password varchar(255), username varchar(255), primary key (id))"; expected "identifier"; SQL statement:
+create table user (id bigint not null, display_name varchar(255), password varchar(255), username varchar(255), primary key (id)) [42001-214]
+2022-10-26 14:21:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table [*]user (id bigint not null, display_name varchar(255), password varchar(255), username varchar(255), primary key (id))"; expected "identifier"; SQL statement:
+create table user (id bigint not null, display_name varchar(255), password varchar(255), username varchar(255), primary key (id)) [42001-214]
+2022-10-26 14:22:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table [*]user (id bigint not null, display_name varchar(255), password varchar(255), username varchar(255), primary key (id))"; expected "identifier"; SQL statement:
+create table user (id bigint not null, display_name varchar(255), password varchar(255), username varchar(255), primary key (id)) [42001-214]
+2022-10-26 14:24:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table [*]user (id bigint not null, display_name varchar(255), password varchar(255), username varchar(255), primary key (id))"; expected "identifier"; SQL statement:
+create table user (id bigint not null, display_name varchar(255), password varchar(255), username varchar(255), primary key (id)) [42001-214]
