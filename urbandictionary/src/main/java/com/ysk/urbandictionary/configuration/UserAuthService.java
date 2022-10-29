@@ -24,7 +24,7 @@ public class UserAuthService implements UserDetailsService {
         if (inDatabase == null) {
             throw new UsernameNotFoundException("User not found");
         }
-        return new UrbanDictionaryUserDetails(inDatabase);
+        return inDatabase;
 
     }
 }
