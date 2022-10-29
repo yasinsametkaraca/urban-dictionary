@@ -1,11 +1,13 @@
 package com.ysk.urbandictionary.error;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
+@JsonInclude(JsonInclude.Include.NON_NULL) //verilen cevaplarda null olanları getirmez.
 @Data
 public class ApiError {
 

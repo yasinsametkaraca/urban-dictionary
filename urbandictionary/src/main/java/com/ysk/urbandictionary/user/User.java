@@ -26,10 +26,12 @@ public class User {
     @Size(min = 3,max = 52)
     private String displayName;
 
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$")
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).*$",message = "{urbandictionary.constraint.password.Pattern.message}" )
     @Size(min = 8,max = 84)
     @NotNull
     private String password;
+
+    private String image;
 
 
 }
