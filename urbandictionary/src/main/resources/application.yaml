@@ -10,3 +10,8 @@ spring:
         persistence:
           validation:
             mode: none
+  h2:
+    console:
+      enabled=true:
+
+

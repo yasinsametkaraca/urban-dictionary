@@ -1,17 +1,13 @@
 package com.ysk.urbandictionary.user;
 
-import com.ysk.urbandictionary.error.ApiError;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.ysk.urbandictionary.shared.GenericResponse;
+import com.ysk.urbandictionary.shared.Views;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.Map;
 
 @CrossOrigin
 @RestController
@@ -21,11 +17,23 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/api/users")
-    public GenericResponse createUser(@Valid @RequestBody User user){    //RequestBody in mantığı gelen requestin içerisindeki body i bize ver deriz.
+    public GenericResponse createUser(@Valid @RequestBody User user){                                           //RequestBody in mantığı gelen requestin içerisindeki body i bize ver deriz.
         userService.save(user);
         return new GenericResponse("User created successfully");
     }
-    /*@ExceptionHandler(MethodArgumentNotValidException.class)
+    @GetMapping("/api/users")
+    /*@JsonView(Views.Base.class)*/                                                                              //passwordun gelmemesi için. ve sadece JsonView tanımlı olanların gelmesi için
+    Page<User> getAllUsers(@RequestParam int currentPage, @RequestParam(required = false,defaultValue = "5") int pageSize){                           //url içinde istek atılanlar için requestParam kullanılır.
+        return userService.getAllUsers(currentPage, pageSize);
+    }
+
+}
+
+
+
+
+
+/*@ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiError handleValidationException(MethodArgumentNotValidException exception) {
         ApiError error = new ApiError(400,"Validation Error","api/users");
@@ -36,9 +44,6 @@ public class UserController {
         error.setValidationErrors(validationErrors);
         return error;
     }*/
-}
-
-
 
 
   /*  ApiError error = new ApiError(400,"Validation Error","api/users");

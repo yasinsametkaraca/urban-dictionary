@@ -15,7 +15,7 @@ public class UrbandictionaryApplication {
 		SpringApplication.run(UrbandictionaryApplication.class, args);
 	}
 
-	@Bean
+	/*@Bean  //springin kullandığı bir object olabilmesi için
 	CommandLineRunner createInitialUsers(UserService userService){
 		return new CommandLineRunner(){
 			@Override
@@ -23,9 +23,11 @@ public class UrbandictionaryApplication {
 				User user = new User();
 				user.setUsername("username1");
 				user.setPassword("Yasin.38");
+
 				userService.save(user);
 			}
 		};
-	}
+	}*/
+
 
 }

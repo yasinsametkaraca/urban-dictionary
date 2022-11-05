@@ -1,9 +1,14 @@
 package com.ysk.urbandictionary.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserService {
@@ -22,4 +27,10 @@ public class UserService {
         userRepository.save(user);
 
     }
+    public Page<User> getAllUsers(int currentPage,int pageSize) {
+        Pageable page=PageRequest.of(currentPage,pageSize);                //hangi sayfa ve o sayfada kaç item olacak.
+        return userRepository.findAll(page);
+    }
+
+
 }
