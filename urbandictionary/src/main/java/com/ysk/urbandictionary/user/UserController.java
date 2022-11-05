@@ -1,5 +1,6 @@
 package com.ysk.urbandictionary.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.ysk.urbandictionary.shared.GenericResponse;
 import com.ysk.urbandictionary.shared.Views;
@@ -22,9 +23,10 @@ public class UserController {
         userService.save(user);
         return new GenericResponse("User created successfully");
     }
+
+    //@JsonView                                                                                                   //passwordun vs. gelmemesi için PageSerializer adında class oluşturup nelerin gelmesi gerektiğini ayarladık. Page i configure ettik.
     @GetMapping("/api/users")
-    @JsonView(Views.Base.class)                                                                                 //passwordun vs. gelmemesi için PageSerializer adında class oluşturup nelerin gelmesi gerektiğini ayarladık. Page i configure ettik.
-    Page<User> getAllUsers(Pageable page){                                                                       //url içinde istek atılanlar için requestParam kullanılır.
+    Page<UserProjection> getAllUsers(Pageable page){                                                                       //url içinde istek atılanlar için requestParam kullanılır.
         return userService.getAllUsers(page);
     }
 

@@ -1,3 +1,4 @@
+/*
 package com.ysk.urbandictionary.configuration;
 
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -77,3 +78,4 @@ public class PageSerializer extends JsonSerializer<Page<?>> {                   
 //    "first": true,
 //    "empty": false
 
+*/
