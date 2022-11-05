@@ -8,8 +8,10 @@ import org.springframework.data.jpa.repository.Query;
 public interface UserRepository extends JpaRepository<User,Long> {
 
     User findByUsername(String username);
-
-    @Query(value="Select u from User u")  //jpql şeklinde yazacağız. (Java Persistence Query Language) . Bütün userları getir ama UserProjection şeklinde.
-    Page<UserProjection> getAllUsersProjection(Pageable page);
-
 }
+
+
+
+
+  /*@Query(value="Select u from User u")  //jpql şeklinde yazacağız. (Java Persistence Query Language) . Bütün userları getir ama UserProjection şeklinde.
+    Page<UserProjection> getAllUsersProjection(Pageable page);*/

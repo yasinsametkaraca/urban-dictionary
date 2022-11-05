@@ -1,3 +1,4 @@
+/*
 package com.ysk.urbandictionary.user;
 
 public interface UserProjection {  //db seviyesinde limitlemeye çalışacağız. istediğimiz fieldları db den alıp dönücez yani projection yapıcaz. (page için yapıcaz)
@@ -8,3 +9,4 @@ public interface UserProjection {  //db seviyesinde limitlemeye çalışacağız
     String getImage();
 
 }
+*/

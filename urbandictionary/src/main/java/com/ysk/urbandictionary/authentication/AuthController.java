@@ -3,12 +3,11 @@ package com.ysk.urbandictionary.authentication;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.ysk.urbandictionary.shared.CurrentUser;
-import com.ysk.urbandictionary.shared.Views;
 import com.ysk.urbandictionary.user.User;
 import com.ysk.urbandictionary.user.UserRepository;
+import com.ysk.urbandictionary.user.dtos.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,13 +16,9 @@ public class AuthController {
     @Autowired
     UserRepository userRepository;
 
-    /*PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();*/
-
-    @JsonView(Views.Base.class)
     @PostMapping("/api/auth")
-    ResponseEntity<?> handleAuthentication(@CurrentUser User user) {       //RequestHeader in mantığı gelen isteğin header bilgisini(Authorization bilgisi) almak. required yazarak frontendden o bilgiyi zorunlu bir şekilde getirmesini reddettik.
-        /*User user = (User) authentication.getPrincipal(); */ //o an login olan user currentUser annotation ile inject edilir.
-        return ResponseEntity.ok(user);  //frontende dönüyoruz
+    UserDto handleAuthentication(@CurrentUser User user) {       //RequestHeader in mantığı gelen isteğin header bilgisini(Authorization bilgisi) almak. required yazarak frontendden o bilgiyi zorunlu bir şekilde getirmesini reddettik.
+        return new UserDto(user);  //frontende dönüyoruz
     }
 
 
