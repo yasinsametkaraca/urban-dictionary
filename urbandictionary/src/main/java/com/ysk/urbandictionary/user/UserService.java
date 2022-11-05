@@ -27,10 +27,15 @@ public class UserService {
         userRepository.save(user);
 
     }
-    public Page<User> getAllUsers(int currentPage,int pageSize) {
-        Pageable page=PageRequest.of(currentPage,pageSize);                //hangi sayfa ve o sayfada kaç item olacak.
+    public Page<User> getAllUsers(Pageable page) {                                   //sayfalamayla çağırıcaz mesela hangi sayfa ve ve o sayfada kaç item olacak. pageable page yapısını application.yaml da kontrol edicez. sayfa sınırlarını springe bıraktık. page ve size diyerek url içinde kullanarak ayarını yapıcaz.
         return userRepository.findAll(page);
     }
 
 
 }
+
+
+   /* public Page<User> getAllUsers(int currentPage,int pageSize) {
+        Pageable page=PageRequest.of(currentPage,pageSize);                //hangi sayfa ve o sayfada kaç item olacak.
+        return userRepository.findAll(page);
+    }*/

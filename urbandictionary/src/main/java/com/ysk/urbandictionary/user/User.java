@@ -1,5 +1,6 @@
 package com.ysk.urbandictionary.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.ysk.urbandictionary.shared.Views;
 import lombok.Data;
@@ -43,7 +44,9 @@ public class User implements UserDetails {
     private String image;
 
 
-    @Override
+
+   /* @JsonIgnore  //json dosyasında burayı gösterme.*/
+   @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return AuthorityUtils.createAuthorityList("Role_user");  //spring security rol vermemizi istiyor.
     }

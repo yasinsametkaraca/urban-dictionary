@@ -5,6 +5,7 @@ import com.ysk.urbandictionary.shared.GenericResponse;
 import com.ysk.urbandictionary.shared.Views;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -22,9 +23,9 @@ public class UserController {
         return new GenericResponse("User created successfully");
     }
     @GetMapping("/api/users")
-    /*@JsonView(Views.Base.class)*/                                                                              //passwordun gelmemesi için. ve sadece JsonView tanımlı olanların gelmesi için
-    Page<User> getAllUsers(@RequestParam int currentPage, @RequestParam(required = false,defaultValue = "5") int pageSize){                           //url içinde istek atılanlar için requestParam kullanılır.
-        return userService.getAllUsers(currentPage, pageSize);
+    @JsonView(Views.Base.class)                                                                                 //passwordun vs. gelmemesi için PageSerializer adında class oluşturup nelerin gelmesi gerektiğini ayarladık. Page i configure ettik.
+    Page<User> getAllUsers(Pageable page){                                                                       //url içinde istek atılanlar için requestParam kullanılır.
+        return userService.getAllUsers(page);
     }
 
 }
@@ -32,6 +33,14 @@ public class UserController {
 
 
 
+
+
+
+
+
+/*Page<User> getAllUsers(@RequestParam int currentPage, @RequestParam(required = false,defaultValue = "5") int pageSize){                           //url içinde istek atılanlar için requestParam kullanılır.
+        return userService.getAllUsers(currentPage, pageSize);
+}*/
 
 /*@ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
