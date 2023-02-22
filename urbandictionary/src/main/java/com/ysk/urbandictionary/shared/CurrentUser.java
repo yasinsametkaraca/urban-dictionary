@@ -14,5 +14,4 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @AuthenticationPrincipal  //otomatik cast etme işlemi yapıcaz.
 public @interface CurrentUser {  //login olan o anki kullanıcı otomatik cast edicek.
 
-
 }
