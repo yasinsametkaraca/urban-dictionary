@@ -17,7 +17,7 @@ public class AuthController {
     UserRepository userRepository;
 
     @PostMapping("/api/auth")
-    UserDto handleAuthentication(@CurrentUser User user) {       //RequestHeader in mantığı gelen isteğin header bilgisini(Authorization bilgisi) almak. required yazarak frontendden o bilgiyi zorunlu bir şekilde getirmesini reddettik.
+    UserDto handleAuthentication(@CurrentUser User user) {
         return new UserDto(user);  //frontende dönüyoruz
     }
 

@@ -7,4 +7,6 @@ public class UserUpdateDto {
 
     private String displayName;
 
+    private String image;
+
 }

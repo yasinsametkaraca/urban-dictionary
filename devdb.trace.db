@@ -1,0 +1,21 @@
+2023-02-23 19:21:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "IMAGE CHARACTER VARYING(255)": "SPACE(113319 /* table: -2 id: 1 */) (113319)"; SQL statement:
+update users set display_name=?, image=?, password=?, username=? where id=? [22001-214]
+2023-02-23 19:21:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "IMAGE CHARACTER VARYING(255)": "SPACE(325123 /* table: -2 id: 2 */) (325123)"; SQL statement:
+update users set display_name=?, image=?, password=?, username=? where id=? [22001-214]
+2023-02-23 19:25:57 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "IMAGE CHARACTER VARYING(255)": "SPACE(7163743 /* table: -2 id: 1 */) (7163743)"; SQL statement:
+update users set display_name=?, image=?, password=?, username=? where id=? [22001-214]
+2023-02-23 19:26:21 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "IMAGE CHARACTER VARYING(255)": "SPACE(7163743 /* table: -2 id: 2 */) (7163743)"; SQL statement:
+update users set display_name=?, image=?, password=?, username=? where id=? [22001-214]
+2023-02-23 19:29:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "IMAGE CHARACTER VARYING(255)": "SPACE(68835 /* table: -2 id: 3 */) (68835)"; SQL statement:
+update users set display_name=?, image=?, password=?, username=? where id=? [22001-214]
+2023-02-23 19:33:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "IMAGE CHARACTER VARYING(255)": "SPACE(68835 /* table: -2 id: 4 */) (68835)"; SQL statement:
+update users set display_name=?, image=?, password=?, username=? where id=? [22001-214]
+2023-02-23 19:40:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "IMAGE CHARACTER VARYING(255)": "SPACE(265403 /* table: -2 id: 5 */) (265403)"; SQL statement:
+update users set display_name=?, image=?, password=?, username=? where id=? [22001-214]

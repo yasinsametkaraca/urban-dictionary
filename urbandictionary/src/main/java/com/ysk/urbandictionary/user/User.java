@@ -39,10 +39,8 @@ public class User implements UserDetails {
 
     private String image;
 
-
-
-   /* @JsonIgnore  //json dosyasında burayı gösterme.*/
-   @Override
+    /* @JsonIgnore  //json dosyasında burayı gösterme.*/
+    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return AuthorityUtils.createAuthorityList("Role_user");  //spring security rol vermemizi istiyor.
     }

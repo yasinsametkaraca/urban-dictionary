@@ -13,7 +13,5 @@ public interface UserRepository extends JpaRepository<User,Long> {
 }
 
 
-
-
   /*@Query(value="Select u from User u")  //jpql şeklinde yazacağız. (Java Persistence Query Language) . Bütün userları getir ama UserProjection şeklinde.
     Page<UserProjection> getAllUsersProjection(Pageable page);*/

@@ -10,11 +10,30 @@ spring:
         persistence:
           validation:
             mode: none
+  profiles:
+    active:
+    - dev
   data:
     web:
       pageable:
         default-page-size: 10
         max-page-size: 1500
+---
+spring:
+  config:
+    activate:
+      on-profile: production
+dictionary:
+  upload-path: storage-production
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+dictionary:
+  upload-path: storage-dev
+
+
 
 
 

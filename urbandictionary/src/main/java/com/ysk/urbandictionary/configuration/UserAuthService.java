@@ -25,6 +25,5 @@ public class UserAuthService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found");
         }
         return inDatabase;
-
     }
 }

@@ -16,6 +16,7 @@ public class UrbandictionaryApplication {
 	}
 
 	/*@Bean  //springin kullandığı bir object olabilmesi için
+	@Profile("dev") //sadece dev modundayken çalışsın deriz.
 	CommandLineRunner createInitialUsers(UserService userService){
 		return new CommandLineRunner(){
 			@Override
@@ -28,6 +29,8 @@ public class UrbandictionaryApplication {
 			}
 		};
 	}*/
+
+
 
 
 }

@@ -1,6 +1,7 @@
 package com.ysk.urbandictionary.user;
 
 import com.ysk.urbandictionary.error.NotFoundException;
+import com.ysk.urbandictionary.file.FileService;
 import com.ysk.urbandictionary.user.dtos.UserUpdateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -8,15 +9,21 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.io.*;
+import java.util.Base64;
+
 @Service
 public class UserService {
     UserRepository userRepository;
     PasswordEncoder passwordEncoder;
 
+    FileService fileService;
+
     @Autowired
-    public UserService(UserRepository userRepository,PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository,PasswordEncoder passwordEncoder,FileService fileService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.fileService=fileService;
     }
 
     public void save(User user) {
@@ -43,8 +50,19 @@ public class UserService {
     public User updateUser(String username, UserUpdateDto updatedUser) {
         User inDatabase= getByUsername(username);
         inDatabase.setDisplayName(updatedUser.getDisplayName());
+        if(updatedUser.getImage() != null){
+            String oldImageName = inDatabase.getImage(); //eski image i silmek için.
+            try {
+                String storedFileName = fileService.writeBase64EncodedStringToFile(updatedUser.getImage());
+                inDatabase.setImage(storedFileName);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            fileService.deleteFile(oldImageName);
+        }
         return userRepository.save(inDatabase);
     }
+
 }
 
 
