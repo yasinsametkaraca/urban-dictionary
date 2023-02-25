@@ -48,7 +48,7 @@ public class UserController {
 
     @PutMapping("/users/{username}")
     @PreAuthorize("#username == principal.username") //bu metoda gelmeden önce authorize yap. Eğer parantez içindekiler doğruysa girer metodun içine. Principal logged olan kullanıcıyı temsil eder.
-    UserDto updateUser(@RequestBody UserUpdateDto updatedUser, @PathVariable String username) {
+    UserDto updateUser(@Valid @RequestBody UserUpdateDto updatedUser, @PathVariable String username) { //@Valid yazınca validation yapmasını isteriz.
         User user = userService.updateUser(username,updatedUser);
         return new UserDto(user);
     }

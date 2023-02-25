@@ -2,6 +2,7 @@ package com.ysk.urbandictionary.file;
 
 
 import com.ysk.urbandictionary.configuration.AppConfiguration;
+import org.apache.tika.Tika;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -21,13 +22,20 @@ public class FileService {
     @Autowired
     AppConfiguration appConfiguration;
 
+    Tika tika;  //tika gönderdiğimiz dosyanın img mi png mi pdf mi filan olduğunu anlıcak.
+
+    public FileService(AppConfiguration appConfiguration) {
+        this.appConfiguration = appConfiguration;
+        this.tika = new Tika();
+    }
+
     public String writeBase64EncodedStringToFile(String image) throws IOException {
+
         String fileName = generateRandomName();
         File target = new File( appConfiguration.getUploadPath() + "/" + fileName);
         OutputStream outputStream = new FileOutputStream(target);
 
         byte[] base64Encoded = Base64.getDecoder().decode(image);
-
         outputStream.write(base64Encoded);
         outputStream.close();
         return fileName;
@@ -45,5 +53,11 @@ public class FileService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public String detechType(String value) {
+        byte[] base64Encoded = Base64.getDecoder().decode(value);
+        String fileType = tika.detect(base64Encoded);
+        return fileType;
     }
 }
