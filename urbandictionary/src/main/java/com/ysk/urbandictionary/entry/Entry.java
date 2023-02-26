@@ -1,5 +1,6 @@
 package com.ysk.urbandictionary.entry;
 
+import com.ysk.urbandictionary.user.User;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -27,5 +28,8 @@ public class Entry {
     @Temporal(TemporalType.TIMESTAMP) //hem tarih hem saat bilgisi olsun.
     private Date timestamp;
 
+    @ManyToOne      //her entyrinin bir useri vardır.
+    @JoinColumn(name = "user_id")  //entry tablosuna user_id kolonu koyar.
+    private User user;
 
 }

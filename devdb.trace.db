@@ -31,3 +31,6 @@ insert into entry (definition, sentence, timestamp, word, id) values (?, ?, ?, ?
 2023-02-26 19:20:07 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLDataException: Value too long for column "SENTENCE CHARACTER VARYING(255)": "U&'edagojik Formasyon E\\011fitimi Anketi Hakk\\0131nda\\000aKendisine obisis \\00fc... (628)"; SQL statement:
 insert into entry (definition, sentence, timestamp, word, id) values (?, ?, ?, ?, ?) [22001-214]
+2023-02-27 00:07:53 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "alter table entry add column [*]user varbinary(255)"; expected "identifier"; SQL statement:
+alter table entry add column user varbinary(255) [42001-214]
