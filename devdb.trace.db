@@ -19,3 +19,15 @@ update users set display_name=?, image=?, password=?, username=? where id=? [220
 2023-02-23 19:40:54 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLDataException: Value too long for column "IMAGE CHARACTER VARYING(255)": "SPACE(265403 /* table: -2 id: 5 */) (265403)"; SQL statement:
 update users set display_name=?, image=?, password=?, username=? where id=? [22001-214]
+2023-02-26 19:13:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "SENTENCE CHARACTER VARYING(255)": "U&'edagojik Formasyon E\\011fitimi Anketi Hakk\\0131nda\\000aKendisine obisis \\00fc... (628)"; SQL statement:
+insert into entry (definition, sentence, timestamp, word, id) values (?, ?, ?, ?, ?) [22001-214]
+2023-02-26 19:14:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "SENTENCE CHARACTER VARYING(255)": "U&'edagojik Formasyon E\\011fitimi Anketi Hakk\\0131nda\\000aKendisine obisis \\00fc... (628)"; SQL statement:
+insert into entry (definition, sentence, timestamp, word, id) values (?, ?, ?, ?, ?) [22001-214]
+2023-02-26 19:15:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "SENTENCE CHARACTER VARYING(255)": "U&'edagojik Formasyon E\\011fitimi Anketi Hakk\\0131nda\\000aKendisine obisis \\00fc... (628)"; SQL statement:
+insert into entry (definition, sentence, timestamp, word, id) values (?, ?, ?, ?, ?) [22001-214]
+2023-02-26 19:20:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "SENTENCE CHARACTER VARYING(255)": "U&'edagojik Formasyon E\\011fitimi Anketi Hakk\\0131nda\\000aKendisine obisis \\00fc... (628)"; SQL statement:
+insert into entry (definition, sentence, timestamp, word, id) values (?, ?, ?, ?, ?) [22001-214]

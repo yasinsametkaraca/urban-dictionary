@@ -1,7 +1,5 @@
 package com.ysk.urbandictionary.shared;
 
-import com.ysk.urbandictionary.user.UniqueUsernameValidator;
-
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.Retention;
@@ -13,12 +11,14 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE })   //nerde kullanağımızı belirlemek için
 @Retention(RUNTIME)
-@Constraint(validatedBy = {ProfileImageValidator.class })
-public @interface ProfileImage {
+@Constraint(validatedBy = {FileTypeValidator.class })
+public @interface FileType {
 
-    String message() default "{urbandictionary.constraint.ProfileImage.message}";
+    String message() default "{urbandictionary.constraint.FileType.message}";
 
     Class<?>[] groups() default { };
 
     Class<? extends Payload>[] payload() default { };
+
+    String[] types();
 }
