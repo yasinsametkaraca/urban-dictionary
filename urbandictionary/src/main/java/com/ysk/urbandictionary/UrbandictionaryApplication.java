@@ -24,13 +24,9 @@ public class UrbandictionaryApplication {
 				User user = new User();
 				user.setUsername("username1");
 				user.setPassword("Yasin.38");
-
 				userService.save(user);
 			}
 		};
 	}*/
-
-
-
 
 }

@@ -11,7 +11,7 @@ import java.util.Date;
 @Entity
 public class Entry {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Size(min = 1,max = 100)
