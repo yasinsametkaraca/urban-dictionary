@@ -58,7 +58,7 @@ public class UserService {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            fileService.deleteFile(oldImageName);
+            fileService.deleteProfileImageFile(oldImageName);  //kullanıcının profil fotosu değişince eskisini sildim.
         }
         return userRepository.save(inDatabase);
     }

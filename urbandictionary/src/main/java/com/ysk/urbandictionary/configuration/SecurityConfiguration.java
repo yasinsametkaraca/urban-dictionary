@@ -42,6 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST,"/api/auth").authenticated()  //bunlar için security devreye girer token ister.
                 .antMatchers(HttpMethod.PUT,"/api/users/{username}").authenticated()
                 .antMatchers(HttpMethod.POST,"/api/entries").authenticated()
+                .antMatchers(HttpMethod.POST,"/api/entry-attachments").authenticated()
             .and()
             .authorizeRequests().anyRequest().permitAll();  //auth a gelenlerde authentication yap,bunların dışındakilere izin ver.
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);  //security ile ilgili session üretimini yapmaz.

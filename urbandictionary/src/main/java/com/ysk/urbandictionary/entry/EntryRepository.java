@@ -6,12 +6,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import java.util.List;
 
-public interface EntryRepository extends JpaRepository<Entry,Long> {
+public interface EntryRepository extends JpaRepository<Entry,Long>, JpaSpecificationExecutor<Entry> {
 
     Page<Entry> findByUser(User user, Pageable page);           //verilen usera göre page tipinde entry getiricek.
+
+
+
 
     Page<Entry> findByIdLessThan(Long id,Pageable page);        //belirttiğimiz id den öncekileri bulucak.
 

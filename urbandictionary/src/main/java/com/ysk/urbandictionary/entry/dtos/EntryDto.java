@@ -1,6 +1,8 @@
 package com.ysk.urbandictionary.entry.dtos;
 
 import com.ysk.urbandictionary.entry.Entry;
+import com.ysk.urbandictionary.file.FileAttachment;
+import com.ysk.urbandictionary.file.dtos.FileAttachmentDto;
 import com.ysk.urbandictionary.user.dtos.UserDto;
 import lombok.Data;
 
@@ -18,6 +20,7 @@ public class EntryDto {
     private long timestamp; //burda ms cinsinden kullanıcaz.
 
     private UserDto user;
+    private FileAttachmentDto fileAttachment;
     public EntryDto(Entry entry) {
         this.setId(entry.getId());
         this.setWord(entry.getWord());
@@ -25,6 +28,8 @@ public class EntryDto {
         this.setSentence(entry.getSentence());
         this.setTimestamp(entry.getTimestamp().getTime());
         this.setUser(new UserDto(entry.getUser())); //UserDto olarak useri respond edicez. Çünkü UserDto da password yoktur.
+        if(entry.getFileAttachment() != null)
+            this.fileAttachment = new FileAttachmentDto(entry.getFileAttachment());  //FileAttachmentdan sadece name alırız.
     }
 }
 /* //EntryDto ile birlikte backende istek attığımızda respond bu şekilde oluşur.
@@ -34,6 +39,9 @@ id:33,
 sentence:"sdfsdfsf",
 timestamp:1677450736855,
 word: "sdfsf",
+fileAttachment: {
+    name: "fsdfsfsf"
+}
 user:{
     username: "yasinsametkaraca",
     displayName: "yskrca",

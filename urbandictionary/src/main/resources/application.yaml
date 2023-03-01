@@ -18,6 +18,9 @@ spring:
       pageable:
         default-page-size: 10
         max-page-size: 1500
+  servlet:
+    multipart:
+      max-file-size: 10MB
 ---
 spring:
   config:

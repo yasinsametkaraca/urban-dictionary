@@ -11,4 +11,16 @@ public class AppConfiguration {  //properties.yaml da olanlar için burayı kend
 
     private String uploadPath;
 
+    private String profileStorage = "profiles";  //profil image leri için.
+
+    private String attachmentStorage = "attachments";  //attachmentlar için.
+
+    public String getProfileStoragePath() {
+        return uploadPath + "/" + profileStorage;
+    }  //storage-dev / profiles
+
+    public String getAttachmentStoragePath() {
+        return uploadPath + "/" + attachmentStorage;
+    }
+
 }

@@ -26,7 +26,7 @@ public class FileTypeValidator implements ConstraintValidator<FileType,String> {
         if(value==null || value.isEmpty()){ //her requestte image gelmek zorunda değil sadece display name değişebilir bu yüzden burayı düzenledik.
             return true;
         }
-        String fileType = fileService.detechType(value);
+        String fileType = fileService.detectType(value);
         for(String supportedType: this.types){  //her types değişkeni supportedType olarak adlandıralım.
             if(fileType.contains(supportedType)){  //Typesları direk anatosyan üzerinden alıcaz.
                 return true;

@@ -1,5 +1,7 @@
 package com.ysk.urbandictionary.entry;
 
+import com.ysk.urbandictionary.file.FileAttachment;
+import com.ysk.urbandictionary.shared.FileType;
 import com.ysk.urbandictionary.user.User;
 import lombok.Data;
 
@@ -28,8 +30,11 @@ public class Entry {
     @Temporal(TemporalType.TIMESTAMP) //hem tarih hem saat bilgisi olsun.
     private Date timestamp;
 
-    @ManyToOne      //her entyrinin bir useri vardır.
+    @ManyToOne      //her entyrinin bir useri vardır. Unidirectional bir ilişkidir.
     @JoinColumn(name = "user_id")  //entry tablosuna user_id kolonu koyar.
     private User user;
+
+    @OneToOne(mappedBy = "entry") //burayı ekleyince tekil bir şekilde oluşur ilişki ve entry talosunda fileAttachment kısmı oluşmaz. fileAttachment tablosunda entryId kısmı oluşur.
+    private FileAttachment fileAttachment; //bidirectional ilişkiye çevirdim çünkü file a entry objesi üzerinden de erişmek isterim.
 
 }
