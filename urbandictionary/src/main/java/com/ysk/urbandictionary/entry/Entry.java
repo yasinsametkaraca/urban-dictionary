@@ -34,7 +34,7 @@ public class Entry {
     @JoinColumn(name = "user_id")  //entry tablosuna user_id kolonu koyar.
     private User user;
 
-    @OneToOne(mappedBy = "entry") //burayı ekleyince tekil bir şekilde oluşur ilişki ve entry talosunda fileAttachment kısmı oluşmaz. fileAttachment tablosunda entryId kısmı oluşur.
+    @OneToOne(mappedBy = "entry",cascade = CascadeType.REMOVE) //burayı ekleyince tekil bir şekilde oluşur ilişki ve entry talosunda fileAttachment kısmı oluşmaz. fileAttachment tablosunda entryId kısmı oluşur. CascadeType.REMOVE un mantığı, entry silinirse fileAttachment objesini de sil.
     private FileAttachment fileAttachment; //bidirectional ilişkiye çevirdim çünkü file a entry objesi üzerinden de erişmek isterim.
 
 }

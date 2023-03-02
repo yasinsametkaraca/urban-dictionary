@@ -3,6 +3,7 @@ package com.ysk.urbandictionary.entry;
 import com.ysk.urbandictionary.entry.dtos.EntrySubmitDto;
 import com.ysk.urbandictionary.file.FileAttachment;
 import com.ysk.urbandictionary.file.FileAttachmentRepository;
+import com.ysk.urbandictionary.file.FileService;
 import com.ysk.urbandictionary.user.User;
 import com.ysk.urbandictionary.user.UserService;
 import org.springframework.data.domain.Page;
@@ -24,13 +25,15 @@ public class EntryService {
 
     EntryRepository entryRepository;
     UserService userService;
-
     FileAttachmentRepository fileAttachmentRepository;
 
-    public EntryService(EntryRepository entryRepository, UserService userService, FileAttachmentRepository fileAttachmentRepository) {
+    FileService fileService;
+
+    public EntryService(EntryRepository entryRepository, UserService userService, FileAttachmentRepository fileAttachmentRepository, FileService fileService) {
         this.entryRepository = entryRepository;
         this.userService = userService;
         this.fileAttachmentRepository = fileAttachmentRepository;
+        this.fileService = fileService;
     }
 
     public void saveEntry(EntrySubmitDto entrySubmitDto, User user) {
@@ -110,6 +113,15 @@ public class EntryService {
         return (root,query,criteriaBuilder) -> {
             return criteriaBuilder.greaterThan(root.get("id"),id);
         };
+    }
+
+    public void deleteEntry(Long id) {
+        Entry inDatabase = entryRepository.getReferenceById(id);
+        if(inDatabase.getFileAttachment() != null){
+            String fileName = inDatabase.getFileAttachment().getName();
+            fileService.deleteAttachmentFile(fileName);  //attachmenti da dosyadan siliyoruz.
+        }
+        entryRepository.deleteById(id);
     }
 }
 

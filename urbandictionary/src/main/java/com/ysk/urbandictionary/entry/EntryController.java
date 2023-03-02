@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -58,6 +59,13 @@ public class EntryController {
     @GetMapping("/api/users/{username}/entries")
     Page<EntryDto> getEntriesByUsername(@PageableDefault(sort = "id", direction = Sort.Direction.DESC) Pageable page, @PathVariable String username){
         return entryService.getEntriesByUsername(username,page).map(EntryDto::new);
+    }
+
+    @DeleteMapping("/api/entries/{id:[0-9]+}")
+    @PreAuthorize("@entrySecurity.isAllowedToDelete(#id,principal)")  //principal demek o anki login olan kullanıcı demek. EntrySecurityService içinde @Service(value = "entrySecurity") yazarak entrySecurity diye kullandık. EntrySecurityService içindeki isAllowedToDelete metodu ile hem entry var mı hemde silinen entry o userin mı kontrolü yaptım dönen cevap olumsuz durumda forbidden olur. Normalde biz entrySecurity yapmasaydık spring entrySecurityService diyerek oluştururdu. Spring oluşturduğumuz her @service @Restcontroller vs. için özel bean (instance) oluşturur onları başındaki harf küçük olarak isimlendirir.
+    GenericResponse deleteEntry(@PathVariable Long id){
+        entryService.deleteEntry(id);
+        return new GenericResponse("Entry removed.");
     }
 
 }
