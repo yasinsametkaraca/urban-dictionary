@@ -2,6 +2,7 @@ package com.ysk.urbandictionary.file;
 
 
 import com.ysk.urbandictionary.configuration.AppConfiguration;
+import com.ysk.urbandictionary.user.User;
 import org.apache.tika.Tika;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -110,5 +111,11 @@ public class FileService {
             fileAttachmentRepository.deleteById(file.getId()); //db den sildim.
         }
     }
-
+    public void deleteAllStoredFilesForUser(User user) {  //bu metod o usera ait hem profil imagesi hemde o userin sahip olduğu entrilerin attachmentlarını siler.
+        deleteProfileImageFile(user.getImage()); //user silinince profil fotosuda silinecek.
+        List<FileAttachment> filesToBeRemoved = fileAttachmentRepository.findByEntryUser(user); //Verdiğimiz usera ait olan Entrylerin FileAttachment ları döner.
+        for(FileAttachment file:filesToBeRemoved){
+            deleteAttachmentFile(file.getName()); //tek tek dosyaları siler.
+        }
+    }
 }

@@ -6,12 +6,14 @@ import com.ysk.urbandictionary.file.FileAttachmentRepository;
 import com.ysk.urbandictionary.file.FileService;
 import com.ysk.urbandictionary.user.User;
 import com.ysk.urbandictionary.user.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.Access;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -24,17 +26,21 @@ import java.util.Optional;
 public class EntryService {
 
     EntryRepository entryRepository;
-    UserService userService;
+    UserService userService; //setter injection
     FileAttachmentRepository fileAttachmentRepository;
-
     FileService fileService;
 
-    public EntryService(EntryRepository entryRepository, UserService userService, FileAttachmentRepository fileAttachmentRepository, FileService fileService) {
+    public EntryService(EntryRepository entryRepository,FileAttachmentRepository fileAttachmentRepository,FileService fileService,UserService userService) {
         this.entryRepository = entryRepository;
-        this.userService = userService;
         this.fileAttachmentRepository = fileAttachmentRepository;
         this.fileService = fileService;
+        this.userService = userService;
     }
+
+    /*@Autowired
+    public void setUserService(UserService userService) {  //UserService i constructordan daha sonra initialize eder. Setter Injection denir bu yaklaşıma. Direk constructordan yapsaydık, UserService içinde de EntryService kullanıldığından döngü olurdu.
+        this.userService = userService;
+    }*/
 
     public void saveEntry(EntrySubmitDto entrySubmitDto, User user) {
         Entry entry = new Entry();
@@ -123,10 +129,8 @@ public class EntryService {
         }
         entryRepository.deleteById(id);
     }
+
 }
-
-
-
 
 /*
    public Page<Entry> findByIdLessThanAndUser(Long id, String username, Pageable page) {

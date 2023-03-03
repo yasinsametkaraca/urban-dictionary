@@ -1,9 +1,11 @@
 package com.ysk.urbandictionary.user;
 
+import com.ysk.urbandictionary.entry.EntryService;
 import com.ysk.urbandictionary.error.NotFoundException;
 import com.ysk.urbandictionary.file.FileService;
 import com.ysk.urbandictionary.user.dtos.UserUpdateDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,15 +18,19 @@ import java.util.Base64;
 public class UserService {
     UserRepository userRepository;
     PasswordEncoder passwordEncoder;
-
     FileService fileService;
 
     @Autowired
     public UserService(UserRepository userRepository,PasswordEncoder passwordEncoder,FileService fileService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
-        this.fileService=fileService;
+        this.fileService = fileService;
     }
+
+   /* @Autowired
+    public void setEntryService(EntryService entryService) {  //setter injection. İki servisin birbirine ihtiyacı olduğunda setter injection yaparız.
+        this.entryService = entryService;
+    }*/
 
     public void save(User user) {
         String encryptedPassword = this.passwordEncoder.encode(user.getPassword());
@@ -63,22 +69,12 @@ public class UserService {
         return userRepository.save(inDatabase);
     }
 
+    public void deleteUserByUsername(String username) {
+        User inDatabase = userRepository.findByUsername(username);
+        fileService.deleteAllStoredFilesForUser(inDatabase);
+        userRepository.delete(inDatabase);
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

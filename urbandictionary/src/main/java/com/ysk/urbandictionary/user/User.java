@@ -1,6 +1,7 @@
 package com.ysk.urbandictionary.user;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.ysk.urbandictionary.entry.Entry;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -11,6 +12,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Collection;
+import java.util.List;
 
 //hibernate java objectleri ile onlara karşılık gelen database tabloları arası ilişki sağlar
 @Data
@@ -38,6 +40,9 @@ public class User implements UserDetails {
     private String password;
 
     private String image;
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE) //entry tablosundaki user sütünü bizim foreign keyimizdir. Yani mappedBy ile birlikte sadece entry tablosunda user_id oluşucak. CascadeType.REMOVE demek user silinirse onun sahip olduğu entryleride sil demek.
+    private List<Entry> entries;
 
     /* @JsonIgnore  //json dosyasında burayı gösterme.*/
     @Override

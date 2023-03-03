@@ -53,6 +53,13 @@ public class UserController {
         return new UserDto(user);
     }
 
+    @DeleteMapping("/users/{username}")
+    @PreAuthorize("#username == principal.username")
+    GenericResponse deleteUserByUsername(@PathVariable String username) {
+        userService.deleteUserByUsername(username);
+        return new GenericResponse("User is deleted.");
+    }
+
 }
 
 
