@@ -34,7 +34,7 @@ public class UserService {
 
     public void save(User user) {
         String encryptedPassword = this.passwordEncoder.encode(user.getPassword());
-        user.setPassword(encryptedPassword);
+        user.setPassword(encryptedPassword); //şifreyi hasheledik.
         userRepository.save(user);
 
     }

@@ -15,6 +15,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -31,21 +32,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
-        http.httpBasic().authenticationEntryPoint(new AuthenticationEntryPoint() {
-            @Override
-            public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-               response.sendError(HttpStatus.UNAUTHORIZED.value(),HttpStatus.UNAUTHORIZED.getReasonPhrase());
-            }
-        });
+        http.exceptionHandling().authenticationEntryPoint(new AuthEntryPoint()); //auth fail olduğunda yönetebilmek için.
+
         http.headers().frameOptions().disable();  //h2 console erişmek için yaptık.
+
         http.authorizeRequests()
-                .antMatchers(HttpMethod.POST,"/api/auth").authenticated()  //bunlar için security devreye girer token ister.
-                .antMatchers(HttpMethod.PUT,"/api/users/{username}").authenticated()
+                .antMatchers(HttpMethod.PUT,"/api/users/{username}").authenticated() //bunlar için security devreye girer token ister.
                 .antMatchers(HttpMethod.POST,"/api/entries").authenticated()
                 .antMatchers(HttpMethod.POST,"/api/entry-attachments").authenticated()
             .and()
             .authorizeRequests().anyRequest().permitAll();  //auth a gelenlerde authentication yap,bunların dışındakilere izin ver.
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);  //security ile ilgili session üretimini yapmaz.
+
+        http.addFilterBefore(tokenFilter(), UsernamePasswordAuthenticationFilter.class);  //gelen bütün requestlerde bizim filter metodumuz  da çalışacak. UsernamePasswordAuthenticationFilter dan önce bizim koyduğumuz requeste bakılıcak. Yani araya token sorgulaması için kendi filterimizi yazdık.
     }
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userAuthService).passwordEncoder(passwordEncoder());   //spring security e bir user arıyorsan UserAuthService i kullan. onun içinde loadUserByUsername ile databasede arayabilirsin. ve BCryptPasswordEncoder i kullandığımızı söylüyuruz.
@@ -53,5 +52,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
+    }  //şifreyi hashlemek için.
+
+    @Bean
+    TokenFilter tokenFilter(){                                  //tokenfilterin instance inin oluşturulması için
+        return new TokenFilter();
     }
 }

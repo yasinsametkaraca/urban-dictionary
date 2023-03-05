@@ -1,6 +1,5 @@
 package com.ysk.urbandictionary.shared;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
 import java.lang.annotation.Retention;
