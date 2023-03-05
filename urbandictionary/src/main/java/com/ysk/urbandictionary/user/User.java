@@ -1,6 +1,6 @@
 package com.ysk.urbandictionary.user;
 
-import com.fasterxml.jackson.annotation.JsonView;
+import com.ysk.urbandictionary.authentication.Token;
 import com.ysk.urbandictionary.entry.Entry;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -40,6 +40,9 @@ public class User implements UserDetails {
     private String password;
 
     private String image;
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE) //mappedBy ile user tablosunda token_id oluşmaz. Token tablosunda user_id oluşur.
+    private List<Token> tokens;
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE) //entry tablosundaki user sütünü bizim foreign keyimizdir. Yani mappedBy ile birlikte sadece entry tablosunda user_id oluşucak. CascadeType.REMOVE demek user silinirse onun sahip olduğu entryleride sil demek.
     private List<Entry> entries;

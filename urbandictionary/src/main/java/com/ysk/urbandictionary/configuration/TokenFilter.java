@@ -27,9 +27,11 @@ public class TokenFilter extends OncePerRequestFilter {           //gelen bütü
             String token = authorization.substring(7); //tokeni aldık requestten
 
             UserDetails user = authService.getUserDetails(token);  //bu tokendan user bilgisini alıcaz kime ait bir token olduğunu öğrenicez.
-            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user,null,user.getAuthorities());           //spring security ile biraraya getirdik.
-            authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-            SecurityContextHolder.getContext().setAuthentication(authenticationToken); //artık authentication obejsi olarak da bizim userin bilgilerinin barındırıldığı object kullanılacak.
+            if(user != null){
+                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user,null,user.getAuthorities());           //spring security ile biraraya getirdik.
+                authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(authenticationToken); //artık authentication obejsi olarak da bizim userin bilgilerinin barındırıldığı object kullanılacak.
+            }
         }
         filterChain.doFilter(request,response);
     }
