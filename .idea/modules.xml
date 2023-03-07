@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/urban-dictionary.iml" filepath="$PROJECT_DIR$/.idea/urban-dictionary.iml" />
       <module fileurl="file://$PROJECT_DIR$/urbandictionary/urbandictionary.iml" filepath="$PROJECT_DIR$/urbandictionary/urbandictionary.iml" />
     </modules>
   </component>

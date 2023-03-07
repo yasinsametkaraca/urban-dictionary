@@ -8,14 +8,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="urbandictionary" />
+        <module name="urban-dictionary" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="urbandictionary" target="17" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="urban-dictionary" options="-parameters" />
       <module name="urbandictionary" options="-parameters" />
     </option>
   </component>
