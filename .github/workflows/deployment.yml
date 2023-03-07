@@ -14,25 +14,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Use Node.js 12.x
-      uses: actions/setup-node@v3
-      with:
-        node-version: 12.x
-        cache: 'npm'
     - name: Setup Java JDK
       uses: actions/setup-java@v3.10.0
       with:
         # The Java version to set up. Takes a whole or semver Java version. See examples of supported syntax in README file
-        java-version: 11    
-    - run: npm ci
-      working-directory: ../urban-dictionary
-    - run: npm run build --if-present
-      working-directory: ../urban-dictionary
-    
-    - name: copy react to spring static resources
-      run: |
-        mkdir -p src/main/resources/static
-        cp -a ../urban-dictionary/build/. src/main/resources/static/
+        java-version: 11        
     - name: Build spring
       run: mvn -B package --file pom.xml
       working-directory: ./
