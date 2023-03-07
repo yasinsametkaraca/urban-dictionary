@@ -1,0 +1,56 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: UrbanDictionary Deployment
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js 12.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 12.x
+        cache: 'npm'
+    - name: Setup Java JDK
+      uses: actions/setup-java@v3.10.0
+      with:
+        # The Java version to set up. Takes a whole or semver Java version. See examples of supported syntax in README file
+        java-version: 11    
+    - run: npm ci
+      working-directory: ../urban-dictionary
+    - run: npm run build --if-present
+      working-directory: ../urban-dictionary
+    
+    - name: copy react to spring static resources
+      run: |
+        mkdir -p src/main/resources/static
+        cp -a ../urban-dictionary/build/. src/main/resources/static/
+    - name: Build spring
+      run: mvn -B package --file pom.xml
+      working-directory: ./
+      
+    - name: SFTP Deploy
+      # You may pin to the exact commit or the version.
+      # uses: wlixcc/SFTP-Deploy-Action@da88a4dbe95286266bbac3c0b2b8284048d20c8f
+      uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+      with:
+        # username
+        username: ${{secrets.USERNAME}}
+        # your sftp server
+        server: ${{secrets.IP}}
+        # you can copy private_key from your *.pem file, keep format
+        ssh_private_key: ${{secrets.SSH}}
+        # will put all file under this path
+        local_path: ./target/urbandictionary-0.0.1-SNAPSHOT.jar
+        # files will copy to under remote_path
+        remote_path: /home/yasinsamet_ysk    
+      
+    
